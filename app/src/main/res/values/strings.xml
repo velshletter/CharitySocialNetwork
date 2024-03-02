@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Diploma</string>
+    <string name="welcome">Добро пожаловать в наше приложение для волонтеров и организаторов! 🌟 Мы рады видеть вас здесь, в сообществе, где сердечность и доброта создают перемену. Наш портал предназначен для тех, кто готов внести свой вклад в создание лучшего мира.</string>
+    <string name="next">Вперед</string>
+    <string name="email">Почта</string>
+    <string name="password">Пароль</string>
+    <string name="repeat_password">Повторите пароль</string>
+    <string name="repeat_password_hint">Повторите пароль</string>
+    <string name="password_hint">Введите пароль</string>
+    <string name="email_hint">Введите почту</string>
+    <string name="register">Регистрация</string>
+    <string name="already_have_acc">У меня уже есть аккаунт</string>
+    <string name="authorization">Авторизация</string>
+    <string name="login">Войти</string>
+    <string name="enter_your_data">Введите свои данные</string>
+    <string name="save">Сохранить</string>
+    <string name="choose_work_sphere">Выберите сферу где вы готовы помочь</string>
+    <string name="can_update_in_settings">Вы всегда сможете изменить их в настройках</string>
+    <string name="projects">Проекты</string>
+    <string name="settings">Настройки</string>
+    <string name="Home">Главная</string>
+    <string name="profile">Профиль</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="news">Новости</string>
+    <string name="my_subscriptions">Мои подписки</string>
+    <string name="my_projects">Мои проекты</string>
+    <string name="calendar">Календарь</string>
+    <string name="name">Имя</string>
+    <string name="sec_name">Фамилия</string>
+    <string name="age">Возраст</string>
+    <string name="upload_photo">Загрузите фото</string>
+    <string name="create_new_project">Создание нового проекта</string>
+    <string name="project_name">Название проекта</string>
+    <string name="create">Создать</string>
+</resources>
