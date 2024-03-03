@@ -11,7 +11,7 @@ public class ProjectModelAdd {
     public Boolean isOnline;
     public String address;
     public String logo;
-    public UserModel author = new UserModel();
+    public int author;
     public List<NewsModelResponse> posts;
     public List<Integer> subscribers;
     public List<PhotoModel> photos;
@@ -45,7 +45,7 @@ public class ProjectModelAdd {
 
     public ProjectModelAdd(String name, int id, String description, String startDate, String endDate,
                            Boolean isOnline, String address, String logo, List<NewsModelResponse> posts,
-                           List<Integer> subscribers, List<PhotoModel> photos, CategoryModel category, UserModel author) {
+                           List<Integer> subscribers, List<PhotoModel> photos, CategoryModel category, int author) {
         this.name = name;
         this.id = id;
         this.description = description;

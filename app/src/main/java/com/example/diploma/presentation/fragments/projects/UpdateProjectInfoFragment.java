@@ -34,6 +34,7 @@ import com.example.diploma.domain.models.ProjectModel;
 import com.example.diploma.domain.models.ProjectModelAdd;
 import com.example.diploma.domain.models.UploadResponse;
 import com.example.diploma.domain.models.UserModel;
+import com.example.diploma.presentation.Global;
 import com.example.diploma.presentation.fragments.mainFragments.ProfileFragment;
 
 import java.io.ByteArrayOutputStream;
@@ -169,11 +170,9 @@ public class UpdateProjectInfoFragment extends Fragment {
                 String address = adressEditText.getText().toString();
                 String logo = uploadLogoEditText.getText().toString();
                 int categotyId = categorySpinner.getSelectedItemPosition() + 1;
-                UserModel author = new UserModel();
-                author.setId(projectModel.author);
                 ProjectModelAdd projectModelAdd = new ProjectModelAdd(name, projectModel.id, description, startDate, endDate,
                         isOnline, address, logo, new ArrayList<>(), new ArrayList<>(),
-                        new ArrayList<>(), new CategoryModel(categotyId, "string"), author);
+                        new ArrayList<>(), new CategoryModel(categotyId, "string"), Global.userId);
                 Call<ProjectModel> call = new ProjectsRepository().updateProject(projectModel.id, projectModelAdd);
                 call.enqueue(new Callback<ProjectModel>() {
                     @Override
