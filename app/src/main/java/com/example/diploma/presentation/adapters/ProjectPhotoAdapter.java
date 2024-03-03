@@ -1,5 +1,6 @@
 package com.example.diploma.presentation.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -50,7 +51,7 @@ public class ProjectPhotoAdapter extends RecyclerView.Adapter<ProjectPhotoAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProjectPhotoAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProjectPhotoAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         //new DownloadImageTask(holder.imageView).execute(listItemAd.get(position).link);
         Glide.with(holder.imageView.getContext())
                 .load(listItemAd.get(position).link)
