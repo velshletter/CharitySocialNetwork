@@ -5,15 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
@@ -26,6 +17,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.example.diploma.R;
 import com.example.diploma.data.retrofit.ImageBBInstance;
@@ -34,7 +33,7 @@ import com.example.diploma.domain.models.NewsModelResponse;
 import com.example.diploma.domain.models.PhotoModel;
 import com.example.diploma.domain.models.ProjectModel;
 import com.example.diploma.domain.models.UploadResponse;
-import com.example.diploma.presentation.adapters.NewsAdapter;
+import com.example.diploma.presentation.adapters.MyNewsAdapter;
 import com.example.diploma.presentation.adapters.ProjectPhotoAdapter;
 
 import java.io.ByteArrayOutputStream;
@@ -150,7 +149,7 @@ public class MyProjectInfoFragment extends Fragment {
             photosView.setAdapter(adapter);
             photosView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-            NewsAdapter newsAdapter = new NewsAdapter(getContext(), R.layout.news_item_layout, newsList, getLayoutInflater());
+            MyNewsAdapter newsAdapter = new MyNewsAdapter(getContext(), R.layout.news_item_layout, newsList, getLayoutInflater());
             newsListView.setAdapter(newsAdapter);
         }
     }

@@ -20,4 +20,7 @@ public class PostsRepository {
         return RetrofitInstance.postApi.addPost(projectId, post);
     }
 
+    public Call<String> deletePost(int id){
+        return RetrofitInstance.postApi.deletePost(id);
+    }
 }

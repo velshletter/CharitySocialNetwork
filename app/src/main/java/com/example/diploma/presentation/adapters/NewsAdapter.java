@@ -2,10 +2,13 @@ package com.example.diploma.presentation.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +20,8 @@ import com.example.diploma.domain.models.NewsModelResponse;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 public class NewsAdapter extends ArrayAdapter<NewsModelResponse> {
     private LayoutInflater inflater;
@@ -34,10 +39,10 @@ public class NewsAdapter extends ArrayAdapter<NewsModelResponse> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        NewsAdapter.ViewHolder viewHolder;
+        ViewHolder viewHolder;
         NewsModelResponse listItemUser = listItemAd.get(position);
         convertView = inflater.inflate(R.layout.news_item_layout, null, false);
-        viewHolder = new NewsAdapter.ViewHolder();
+        viewHolder = new ViewHolder();
         viewHolder.projectName = convertView.findViewById(R.id.project_name_textview);
         viewHolder.description = convertView.findViewById(R.id.description);
         viewHolder.projectName.setText(listItemUser.getProject());
@@ -50,12 +55,13 @@ public class NewsAdapter extends ArrayAdapter<NewsModelResponse> {
                     .placeholder(R.drawable.baseline_border_color_24)
                     .into(viewHolder.project_logo);
         }
-        if(!listItemUser.getPhotos().isEmpty()) {
+        if(!listItemUser.getPhotos().get(0).link.equals("")) {
+            viewHolder.postImage.setMinimumHeight(750);
             Glide.with(context)
                     .load(listItemUser.getPhotos().get(0).link)
-                    .placeholder(R.drawable.baseline_border_color_24)
                     .into(viewHolder.postImage);
         }
+
         return convertView;
     }
 

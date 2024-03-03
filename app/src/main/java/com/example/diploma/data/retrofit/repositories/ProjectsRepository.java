@@ -46,6 +46,10 @@ public class ProjectsRepository {
         return RetrofitInstance.projectApi.unsubscribe(Global.userId, projectId);
     }
 
+    public Call<String> deleteProject(int projectId){
+        return RetrofitInstance.projectApi.deleteProject(projectId);
+    }
+
     public Call<PhotoModel> addPhoto(int projectId, PhotoModel photoModel) {
         return RetrofitInstance.projectApi.addPhoto(projectId, photoModel);
     }

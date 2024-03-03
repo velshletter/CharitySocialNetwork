@@ -43,6 +43,9 @@ public interface ProjectApi {
     @DELETE("/api/project/unsubscribe")
     Call<String> unsubscribe(@Query("userId") int userId, @Query("projectId") int projectId);
 
+    @DELETE("/api/project/{id}")
+    Call<String> deleteProject(@Path("id") int projectId);
+
     @POST("/api/project/{id}/photo")
     Call<PhotoModel> addPhoto(@Path("id") int id, @Body PhotoModel photo);
 

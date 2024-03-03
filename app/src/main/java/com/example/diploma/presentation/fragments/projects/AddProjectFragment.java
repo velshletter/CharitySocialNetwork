@@ -143,7 +143,8 @@ public class AddProjectFragment extends Fragment {
                 String description = secnameEditText.getText().toString();
                 String startDate = dateStartEditText.getText().toString();
                 String endDate = dateEndEditText.getText().toString();
-                boolean isOnline = (onlineSpinner.getSelectedItemPosition() != 0);
+                Log.d("MyLog", String.valueOf(onlineSpinner.getSelectedItemPosition()));
+                boolean isOnline = (onlineSpinner.getSelectedItemPosition() == 0);
                 String address = adressEditText.getText().toString();
                 String logo = uploadLogoEditText.getText().toString();
                 int categotyId = categorySpinner.getSelectedItemPosition()+1;
@@ -153,10 +154,9 @@ public class AddProjectFragment extends Fragment {
                 call.enqueue(new Callback<ProjectModel>() {
                     @Override
                     public void onResponse(Call<ProjectModel> call, Response<ProjectModel> response) {
-                        ProfileFragment profileFragment = new ProfileFragment();
                         getActivity().getSupportFragmentManager()
                                 .beginTransaction()
-                                .replace(R.id.flFragment, profileFragment)
+                                .replace(R.id.flFragment, new MyProjectsFragment())
                                 .commit();
                     }
 

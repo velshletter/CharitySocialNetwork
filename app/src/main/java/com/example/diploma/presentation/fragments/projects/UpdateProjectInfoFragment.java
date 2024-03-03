@@ -57,6 +57,7 @@ public class UpdateProjectInfoFragment extends Fragment {
     EditText uploadLogoEditText ,nameEditText, descriptionEditText,dateStartEditText, dateEndEditText,adressEditText;
     ProjectModel projectModel;
     Spinner onlineSpinner;
+
     int id;
     List<String> optionsOnline = new ArrayList<>();
     public UpdateProjectInfoFragment(int id) {
@@ -136,7 +137,7 @@ public class UpdateProjectInfoFragment extends Fragment {
             }
         });
         Button button = getView().findViewById(R.id.create_post_button);
-
+        Button delButton = getView().findViewById(R.id.delete_project);
         Spinner categorySpinner = getView().findViewById(R.id.category_spinner);
 
         dateEndEditText.setOnClickListener(new View.OnClickListener() {
@@ -145,12 +146,32 @@ public class UpdateProjectInfoFragment extends Fragment {
                 new DatePickerDialog(getActivity(), dateEnd, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-
-
-
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, getCategories());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(adapter);
+        categorySpinner.setSelection(projectModel.category.getId()-1);
+
+        delButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Call<String> call = new ProjectsRepository().deleteProject(projectModel.id);
+                call.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        Toast.makeText(getContext(), "Удалено", Toast.LENGTH_SHORT).show();
+                        getFragmentManager().beginTransaction()
+                                .replace(R.id.flFragment, new MyProjectsFragment()).commit();
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        Toast.makeText(getContext(), "Удалено", Toast.LENGTH_SHORT).show();
+                        getFragmentManager().beginTransaction()
+                                .replace(R.id.flFragment, new MyProjectsFragment()).commit();
+                    }
+                });
+            }
+        });
 
         uploadLogoEditText.setOnClickListener(new View.OnClickListener() {
             @Override
