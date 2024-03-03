@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -35,7 +34,7 @@ import com.example.diploma.domain.models.NewsModelResponse;
 import com.example.diploma.domain.models.PhotoModel;
 import com.example.diploma.domain.models.ProjectModel;
 import com.example.diploma.domain.models.UploadResponse;
-import com.example.diploma.presentation.adapters.NewsAdapterTest;
+import com.example.diploma.presentation.adapters.NewsAdapter;
 import com.example.diploma.presentation.adapters.ProjectPhotoAdapter;
 
 import java.io.ByteArrayOutputStream;
@@ -151,7 +150,7 @@ public class MyProjectInfoFragment extends Fragment {
             photosView.setAdapter(adapter);
             photosView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-            NewsAdapterTest newsAdapter = new NewsAdapterTest(getContext(), R.layout.news_item_layout, newsList, getLayoutInflater());
+            NewsAdapter newsAdapter = new NewsAdapter(getContext(), R.layout.news_item_layout, newsList, getLayoutInflater());
             newsListView.setAdapter(newsAdapter);
         }
     }

@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.example.diploma.R;
 import com.example.diploma.data.retrofit.repositories.PostsRepository;
 import com.example.diploma.domain.models.NewsModelResponse;
-import com.example.diploma.presentation.adapters.NewsAdapterTest;
+import com.example.diploma.presentation.adapters.NewsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ import retrofit2.Response;
 
 public class NewsFragment extends Fragment {
 
-    private NewsAdapterTest newsAdapter;
+    private NewsAdapter newsAdapter;
     private List<NewsModelResponse> newsList = new ArrayList<>();
     ListView newsListView;
     public NewsFragment() {
@@ -43,7 +43,7 @@ public class NewsFragment extends Fragment {
                     Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
                 } else {
                     newsList = response.body();
-                    newsAdapter = new NewsAdapterTest(getContext(), R.layout.news_item_layout, newsList, getLayoutInflater());
+                    newsAdapter = new NewsAdapter(getContext(), R.layout.news_item_layout, newsList, getLayoutInflater());
                     newsListView.setAdapter(newsAdapter);
                 }
             }
@@ -66,7 +66,7 @@ public class NewsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         newsListView = getView().findViewById(R.id.news_list);
-        newsAdapter = new NewsAdapterTest(getContext(), R.layout.news_item_layout, newsList, getLayoutInflater());
+        newsAdapter = new NewsAdapter(getContext(), R.layout.news_item_layout, newsList, getLayoutInflater());
         newsListView.setAdapter(newsAdapter);
 
 

@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.diploma.R;
@@ -26,7 +24,7 @@ import com.example.diploma.domain.models.NewsModelResponse;
 import com.example.diploma.domain.models.ProjectModel;
 import com.example.diploma.domain.models.UserModel;
 import com.example.diploma.presentation.Global;
-import com.example.diploma.presentation.adapters.NewsAdapterTest;
+import com.example.diploma.presentation.adapters.NewsAdapter;
 import com.example.diploma.presentation.adapters.ProjectPhotoAdapter;
 
 import java.util.List;
@@ -121,7 +119,7 @@ public class ProjectInfoFragment extends Fragment {
 
             List<NewsModelResponse> newsList = loadedProject.posts;
             ListView newsListView = getView().findViewById(R.id.news_project_list);
-            NewsAdapterTest newsAdapter = new NewsAdapterTest(getContext(), R.layout.news_item_layout, newsList, getLayoutInflater());
+            NewsAdapter newsAdapter = new NewsAdapter(getContext(), R.layout.news_item_layout, newsList, getLayoutInflater());
             newsListView.setAdapter(newsAdapter);
 
             photosView = getView().findViewById(R.id.images);
