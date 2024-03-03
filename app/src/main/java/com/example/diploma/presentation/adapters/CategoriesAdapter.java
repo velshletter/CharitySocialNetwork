@@ -39,24 +39,13 @@ public class CategoriesAdapter extends ArrayAdapter<CategoryModel> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         listItemUser = listItemAd.get(position);
         convertView = inflater.inflate(R.layout.category_item, null, false);
-//        CheckBox checkBox = convertView.findViewById(R.id.checkBox);
         TextView textView = convertView.findViewById(R.id.txtName);
         textView.setText(listItemUser.getName());
         if(listItemUser.getChecked()){
             textView.setBackgroundColor(R.color.purple);
         }
         else textView.setBackgroundColor(R.color.transparent);
-//        checkBox.setChecked(listItemUser.getChecked());
-//        checkBox.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                listItemUser.setChecked(!listItemUser.getChecked());
-//                listItemAd.set(position, listItemUser);
-//                checkBox.setChecked(listItemUser.getChecked());
-////                listItemAd.get(position).setChecked(!listItemUser.getChecked());
-//                Log.d("MyLog", String.valueOf(position));
-//            }
-//        });
+
         return convertView;
     }
 }

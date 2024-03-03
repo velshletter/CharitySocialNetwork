@@ -1,4 +1,4 @@
-package com.example.diploma.presentation.fragments;
+package com.example.diploma.presentation.fragments.projects;
 
 import android.os.Bundle;
 

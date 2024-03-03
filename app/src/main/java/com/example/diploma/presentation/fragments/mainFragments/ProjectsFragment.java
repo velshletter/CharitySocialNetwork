@@ -10,18 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.diploma.R;
 import com.example.diploma.data.retrofit.repositories.ProjectsRepository;
 import com.example.diploma.domain.models.ProjectItemModel;
-import com.example.diploma.domain.usecases.project.GetAllProjectsUseCase;
 import com.example.diploma.presentation.adapters.ProjectListAdapter;
-import com.example.diploma.presentation.adapters.ProjectsAdapter;
-import com.example.diploma.domain.models.ProjectModel;
-import com.example.diploma.presentation.fragments.ProjectInfoFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +45,7 @@ public class ProjectsFragment extends Fragment {
             @Override
             public void onResponse(Call<List<ProjectItemModel>> call, Response<List<ProjectItemModel>> response) {
                 projectsList = response.body();
-                projectsAdapter = new ProjectListAdapter(getContext(), R.layout.project_item, projectsList, getLayoutInflater(), getFragmentManager());
+                projectsAdapter = new ProjectListAdapter(getContext(), R.layout.project_item, projectsList, getLayoutInflater(), getParentFragmentManager());
                 projectsListView.setAdapter(projectsAdapter);
             }
 

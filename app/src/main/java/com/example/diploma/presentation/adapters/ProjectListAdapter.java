@@ -17,10 +17,9 @@ import androidx.fragment.app.FragmentManager;
 import com.bumptech.glide.Glide;
 import com.example.diploma.R;
 import com.example.diploma.data.retrofit.repositories.ProjectsRepository;
-import com.example.diploma.data.retrofit.repositories.UsersRepository;
 import com.example.diploma.domain.models.ProjectItemModel;
 import com.example.diploma.domain.models.ProjectModel;
-import com.example.diploma.presentation.fragments.ProjectInfoFragment;
+import com.example.diploma.presentation.fragments.projects.ProjectInfoFragment;
 
 import java.util.List;
 

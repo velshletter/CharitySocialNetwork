@@ -1,9 +1,9 @@
 package com.example.diploma.data.retrofit;
 
+import com.example.diploma.data.retrofit.interfaces.CategoriesApi;
 import com.example.diploma.data.retrofit.interfaces.PostApi;
 import com.example.diploma.data.retrofit.interfaces.ProjectApi;
 import com.example.diploma.data.retrofit.interfaces.UsersApi;
-import com.example.diploma.presentation.Global;
 
 import java.net.CookieManager;
 import java.net.CookiePolicy;
@@ -24,6 +24,7 @@ public class RetrofitInstance {
     public static UsersApi usersApi;
     public static ProjectApi projectApi ;
     public static PostApi postApi;
+    public static CategoriesApi categoriesApi;
 
     public static void updateRetrofit(String url){
         retrofit = new Retrofit.Builder()
@@ -34,6 +35,7 @@ public class RetrofitInstance {
         usersApi  = retrofit.create(UsersApi.class);
         projectApi = retrofit.create(ProjectApi.class);
         postApi = retrofit.create(PostApi.class);
+        categoriesApi = retrofit.create(CategoriesApi.class);
     }
 }
 

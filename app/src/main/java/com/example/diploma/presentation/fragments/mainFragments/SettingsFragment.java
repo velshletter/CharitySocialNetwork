@@ -59,9 +59,10 @@ public class SettingsFragment extends Fragment {
                             selectedCategories = response.body().getSelectedCategories();
                         }
                         CategoryChooseFragment categoryChooseFragment = new CategoryChooseFragment(selectedCategories);
-                        getActivity().getSupportFragmentManager()
+                        getParentFragmentManager()
                                 .beginTransaction()
-                                .replace(R.id.flFragment, categoryChooseFragment)
+                                .addToBackStack("CategoryFragment")
+                                .replace(R.id.flFragment, categoryChooseFragment, "CategoryFragment")
                                 .commit();
                     }
 

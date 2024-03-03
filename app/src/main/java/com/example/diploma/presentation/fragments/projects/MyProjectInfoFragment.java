@@ -1,4 +1,4 @@
-package com.example.diploma.presentation.fragments;
+package com.example.diploma.presentation.fragments.projects;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -103,13 +104,23 @@ public class MyProjectInfoFragment extends Fragment {
             TextView description = getView().findViewById(R.id.descriprion_profile);
             Button addPostButton = getView().findViewById(R.id.add_post_button);
             Button addPhotoButton = getView().findViewById(R.id.add_photo_button);
-
+            Button updateProjectButton = getView().findViewById(R.id.update_project_info);
             ListView newsListView = getView().findViewById(R.id.news_project_list);
+
+            updateProjectButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.flFragment, new UpdateProjectInfoFragment(project.id))
+                            .commit();
+                }
+            });
 
             addPostButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AddPostFragment addPostFragment = new AddPostFragment(loadedProject.id);
+                    AddPostFragment addPostFragment = new AddPostFragment(loadedProject);
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.flFragment, addPostFragment)
                             .commit();
@@ -135,7 +146,6 @@ public class MyProjectInfoFragment extends Fragment {
             subscrTV.setText(String.valueOf(loadedProject.subscribers.size()));
             description.setText(loadedProject.description);
             List<NewsModelResponse> newsList = loadedProject.posts;
-
             photosView = getView().findViewById(R.id.images);
             adapter = new ProjectPhotoAdapter(getContext(), loadedProject.photos);
             photosView.setAdapter(adapter);

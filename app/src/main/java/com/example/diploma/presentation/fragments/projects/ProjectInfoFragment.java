@@ -1,4 +1,4 @@
-package com.example.diploma.presentation.fragments;
+package com.example.diploma.presentation.fragments.projects;
 
 import android.os.Bundle;
 
@@ -86,20 +86,15 @@ public class ProjectInfoFragment extends Fragment {
                             });
                         }
                     }
-
                     @Override
                     public void onFailure(Call<UserModel> call, Throwable t) {}
                 });
-
-
             }
-
             @Override
             public void onFailure(Call<ProjectModel> call, Throwable t) {
             }
         });
     }
-
     private void displayData() {
         View view = getView();
         if (view != null) {
@@ -110,7 +105,6 @@ public class ProjectInfoFragment extends Fragment {
             TextView authorTV = getView().findViewById(R.id.authorTextView);
             TextView subscrTV = getView().findViewById(R.id.subscribers);
             TextView description = getView().findViewById(R.id.descriprion_profile);
-
 
             ImageView imageView = getView().findViewById(R.id.imageView2);
             Glide.with(getContext())

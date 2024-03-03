@@ -13,6 +13,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -29,6 +30,9 @@ public interface ProjectApi {
 
     @POST("/api/project")
     Call<ProjectModel> addProject(@Body ProjectModelAdd project, @Query("userId") int id);
+
+    @PUT("/api/project/{id}")
+    Call<ProjectModel> updateProject(@Path("id") int id, @Body ProjectModelAdd projectModel);
 
     @GET("/api/project/subscriptions")
     Call<List<ProjectModel>> getMySubscriptions(@Query("id") int id);

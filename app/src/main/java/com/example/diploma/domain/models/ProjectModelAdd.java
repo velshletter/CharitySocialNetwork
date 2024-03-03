@@ -42,4 +42,22 @@ public class ProjectModelAdd {
         this.photos = photos;
         this.category = category;
     }
+
+    public ProjectModelAdd(String name, int id, String description, String startDate, String endDate,
+                           Boolean isOnline, String address, String logo, List<NewsModelResponse> posts,
+                           List<Integer> subscribers, List<PhotoModel> photos, CategoryModel category, UserModel author) {
+        this.name = name;
+        this.id = id;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.isOnline = isOnline;
+        this.address = address;
+        this.logo = logo;
+        this.posts = posts;
+        this.subscribers = subscribers;
+        this.photos = photos;
+        this.category = category;
+        this.author = author;
+    }
 }

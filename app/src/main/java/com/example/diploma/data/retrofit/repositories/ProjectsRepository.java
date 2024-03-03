@@ -30,6 +30,10 @@ public class ProjectsRepository {
         return RetrofitInstance.projectApi.addProject(project, Global.userId);
     }
 
+    public Call<ProjectModel> updateProject(int id, ProjectModelAdd projectModel){
+        return RetrofitInstance.projectApi.updateProject(id, projectModel);
+    }
+
     public Call<List<ProjectModel>> getMySubscriptions(){
         return RetrofitInstance.projectApi.getMySubscriptions(Global.userId);
     }

@@ -8,12 +8,34 @@ public class NewsModelResponse {
     private String text;
     private List<PhotoModel> photos;
     private String project;
+    private String projectLogo;
+    private String creationDate;
 
-    public NewsModelResponse(int id, String text, List<PhotoModel> photos, String project) {
+
+
+    public NewsModelResponse(int id, String text, List<PhotoModel> photos, String project, String projectLogo, String creationDate) {
         this.id = id;
         this.text = text;
         this.photos = photos;
         this.project = project;
+        this.projectLogo = projectLogo;
+        this.creationDate = creationDate;
+    }
+
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public String getProjectLogo() {
+        return projectLogo;
+    }
+
+    public void setProjectLogo(String projectLogo) {
+        this.projectLogo = projectLogo;
     }
 
     public int getId() {

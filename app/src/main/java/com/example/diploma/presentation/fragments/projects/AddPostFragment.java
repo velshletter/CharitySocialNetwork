@@ -1,4 +1,4 @@
-package com.example.diploma.presentation.fragments;
+package com.example.diploma.presentation.fragments.projects;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -28,10 +28,8 @@ import com.example.diploma.data.retrofit.repositories.PostsRepository;
 import com.example.diploma.domain.models.NewsModelRequest;
 import com.example.diploma.domain.models.NewsModelResponse;
 import com.example.diploma.domain.models.PhotoModel;
+import com.example.diploma.domain.models.ProjectModel;
 import com.example.diploma.domain.models.UploadResponse;
-import com.example.diploma.presentation.adapters.ProjectPhotoAdapter;
-import com.example.diploma.presentation.fragments.mainFragments.NewsFragment;
-import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -47,10 +45,10 @@ public class AddPostFragment extends Fragment {
 
     EditText uploadPhotoEdit;
     List<PhotoModel> photos = new ArrayList<>();
-    int id = 0;
+    ProjectModel projectModel;
 
-    public AddPostFragment(int id) {
-        this.id = id;
+    public AddPostFragment(ProjectModel projectModel) {
+        this.projectModel = projectModel;
     }
 
 
@@ -85,13 +83,13 @@ public class AddPostFragment extends Fragment {
             public void onClick(View v) {
                 photos.add(new PhotoModel(uploadPhotoEdit.getText().toString()));
                 NewsModelRequest post = new NewsModelRequest(editDescr.getText().toString(), photos);
-                Call<NewsModelResponse> call = new PostsRepository().addPost(id, post);
+                Call<NewsModelResponse> call = new PostsRepository().addPost(projectModel.id, post);
                 call.enqueue(new Callback<NewsModelResponse>() {
                     @Override
                     public void onResponse(Call<NewsModelResponse> call, Response<NewsModelResponse> response) {
-                        NewsFragment newsFragment = new NewsFragment();
+                        MyProjectInfoFragment myProjectInfoFragment = new MyProjectInfoFragment(projectModel);
                         getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.flFragment, newsFragment)
+                                .replace(R.id.flFragment, myProjectInfoFragment)
                                 .commit();
                     }
 

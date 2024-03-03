@@ -1,4 +1,4 @@
-package com.example.diploma.presentation.fragments;
+package com.example.diploma.presentation.fragments.projects;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -33,6 +33,7 @@ import com.example.diploma.domain.models.CategoryModel;
 import com.example.diploma.domain.models.ProjectModel;
 import com.example.diploma.domain.models.ProjectModelAdd;
 import com.example.diploma.domain.models.UploadResponse;
+import com.example.diploma.domain.models.UserModel;
 import com.example.diploma.presentation.fragments.mainFragments.ProfileFragment;
 
 import java.io.ByteArrayOutputStream;
@@ -47,80 +48,105 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddProjectFragment extends Fragment {
+public class UpdateProjectInfoFragment extends Fragment {
 
-    final Calendar myCalendar= Calendar.getInstance();
-    String myFormat="YYYY-MM-dd";
-    SimpleDateFormat dateFormat=new SimpleDateFormat(myFormat, Locale.US);
-    EditText uploadLogoEditText;
-    public AddProjectFragment() {
-        // Required empty public constructor
+    final Calendar myCalendar = Calendar.getInstance();
+    String myFormat = "YYYY-MM-dd";
+    SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.US);
+    EditText uploadLogoEditText ,nameEditText, descriptionEditText,dateStartEditText, dateEndEditText,adressEditText;
+    ProjectModel projectModel;
+    Spinner onlineSpinner;
+    int id;
+    List<String> optionsOnline = new ArrayList<>();
+    public UpdateProjectInfoFragment(int id) {
+        this.id = id;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Call<ProjectModel> call = new ProjectsRepository().getProjectById(id);
+        call.enqueue(new Callback<ProjectModel>() {
+            @Override
+            public void onResponse(Call<ProjectModel> call, Response<ProjectModel> response) {
+                if(response.body() != null){
+                    projectModel = response.body();
+                    loadView();
+                }
+            }
 
+            @Override
+            public void onFailure(Call<ProjectModel> call, Throwable t) {
+
+            }
+        });
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_project, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        EditText nameEditText = getView().findViewById(R.id.name_edit);
-        EditText secnameEditText = getView().findViewById(R.id.description_edit);
-        EditText dateStartEditText = getView().findViewById(R.id.date_start_edit);
-        EditText dateEndEditText = getView().findViewById(R.id.date_end_edit);
-        EditText adressEditText = getView().findViewById(R.id.adress_edit);
+    public void loadView(){
+        nameEditText = getView().findViewById(R.id.name_edit);
+        descriptionEditText = getView().findViewById(R.id.description_edit);
+         dateStartEditText = getView().findViewById(R.id.date_start_edit);
+         dateEndEditText = getView().findViewById(R.id.date_end_edit);
+         adressEditText = getView().findViewById(R.id.adress_edit);
         uploadLogoEditText = getView().findViewById(R.id.upload_post_photo);
-        Button button = getView().findViewById(R.id.create_post_button);
-        Spinner onlineSpinner = getView().findViewById(R.id.online_spinner);
-        Spinner categorySpinner = getView().findViewById(R.id.category_spinner);
 
-        DatePickerDialog.OnDateSetListener dateStart =new DatePickerDialog.OnDateSetListener() {
+        nameEditText.setText(projectModel.name);
+        descriptionEditText.setText(projectModel.description);
+        dateStartEditText.setText(projectModel.startDate);
+        dateEndEditText.setText(projectModel.endDate);
+        adressEditText.setText(projectModel.address);
+        adressEditText.setText(projectModel.address);
+        uploadLogoEditText.setText(projectModel.logo);
+        if(projectModel.isOnline){
+            optionsOnline.add("Да");
+            optionsOnline.add("Нет");
+        }else{
+            optionsOnline.add("Нет");
+            optionsOnline.add("Да");
+        }
+        onlineSpinner = getView().findViewById(R.id.online_spinner);
+        ArrayAdapter<String> onlinerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, optionsOnline);
+        onlinerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        onlineSpinner.setAdapter(onlinerAdapter);
+
+        DatePickerDialog.OnDateSetListener dateStart = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
                 myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH,month);
-                myCalendar.set(Calendar.DAY_OF_MONTH,day);
+                myCalendar.set(Calendar.MONTH, month);
+                myCalendar.set(Calendar.DAY_OF_MONTH, day);
                 dateStartEditText.setText(dateFormat.format(myCalendar.getTime()));
+            }
+        };
+
+        DatePickerDialog.OnDateSetListener dateEnd = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, month);
+                myCalendar.set(Calendar.DAY_OF_MONTH, day);
+                dateEndEditText.setText(dateFormat.format(myCalendar.getTime()));
             }
         };
         dateStartEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(getContext() ,dateStart,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                new DatePickerDialog(getContext(), dateStart, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+        Button button = getView().findViewById(R.id.create_post_button);
 
-        DatePickerDialog.OnDateSetListener dateEnd =new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH,month);
-                myCalendar.set(Calendar.DAY_OF_MONTH,day);
-                dateEndEditText.setText(dateFormat.format(myCalendar.getTime()));
-            }
-        };
+        Spinner categorySpinner = getView().findViewById(R.id.category_spinner);
+
         dateEndEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(getActivity(),dateEnd,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                new DatePickerDialog(getActivity(), dateEnd, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-        List<String> optionsOnline = new ArrayList<>();
-        optionsOnline.add("Да");
-        optionsOnline.add("Нет");
-        ArrayAdapter<String> onlinerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, optionsOnline);
-        onlinerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        onlineSpinner.setAdapter(onlinerAdapter);
+
+
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, getCategories());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(adapter);
@@ -135,30 +161,42 @@ public class AddProjectFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 String name = nameEditText.getText().toString();
-                String description = secnameEditText.getText().toString();
+                String description = descriptionEditText.getText().toString();
                 String startDate = dateStartEditText.getText().toString();
                 String endDate = dateEndEditText.getText().toString();
                 boolean isOnline = (onlineSpinner.getSelectedItemPosition() != 0);
                 String address = adressEditText.getText().toString();
                 String logo = uploadLogoEditText.getText().toString();
-                int categotyId = categorySpinner.getSelectedItemPosition()+1;
-
-                ProjectModelAdd project = new ProjectModelAdd(name, 0, description, startDate, endDate,
-                        isOnline, address, logo, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new CategoryModel(categotyId, "string"));
-                Call<ProjectModel> call = new ProjectsRepository().addProject(project);
+                int categotyId = categorySpinner.getSelectedItemPosition() + 1;
+                UserModel author = new UserModel();
+                author.setId(projectModel.author);
+                ProjectModelAdd projectModelAdd = new ProjectModelAdd(name, projectModel.id, description, startDate, endDate,
+                        isOnline, address, logo, new ArrayList<>(), new ArrayList<>(),
+                        new ArrayList<>(), new CategoryModel(categotyId, "string"), author);
+                Call<ProjectModel> call = new ProjectsRepository().updateProject(projectModel.id, projectModelAdd);
                 call.enqueue(new Callback<ProjectModel>() {
                     @Override
                     public void onResponse(Call<ProjectModel> call, Response<ProjectModel> response) {
-                        ProfileFragment profileFragment = new ProfileFragment();
-                        getActivity().getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.flFragment, profileFragment)
-                                .commit();
+                        if(response.body() != null) {
+                            projectModel.isOnline = projectModelAdd.isOnline;
+                            projectModel.name = projectModelAdd.name;
+                            projectModel.address = projectModelAdd.address;
+                            projectModel.description = projectModelAdd.description;
+                            projectModel.logo = projectModelAdd.logo;
+                            projectModel.startDate = projectModelAdd.startDate;
+                            projectModel.endDate = projectModelAdd.endDate;
+                            projectModel.category = projectModelAdd.category;
+                            MyProjectInfoFragment myProjectInfoFragment = new MyProjectInfoFragment(projectModel);
+                            getActivity().getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.flFragment, myProjectInfoFragment)
+                                    .commit();
+                        }
+                        else {
+                            Toast.makeText(getContext(), "Проверьте введенные данные", Toast.LENGTH_SHORT).show();
+                        }
                     }
-
                     @Override
                     public void onFailure(Call<ProjectModel> call, Throwable t) {
                         Toast.makeText(getContext(), "NetworkError", Toast.LENGTH_SHORT).show();
@@ -166,6 +204,19 @@ public class AddProjectFragment extends Fragment {
                 });
             }
         });
+    }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_update_project_info, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
     }
 
     private void imageChooser() {
@@ -215,11 +266,7 @@ public class AddProjectFragment extends Fragment {
         return encImage;
     }
 
-    private void updateLabel(){
-
-    }
-
-    private List<String> getCategories(){
+    private List<String> getCategories() {
         List<String> optionsCategories = new ArrayList<>();
         optionsCategories.add("Здравоохранение и ЗОЖ");
         optionsCategories.add("ЧС");

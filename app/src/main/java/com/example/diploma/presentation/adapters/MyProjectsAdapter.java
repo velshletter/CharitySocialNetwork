@@ -15,11 +15,9 @@ import androidx.fragment.app.FragmentManager;
 
 import com.bumptech.glide.Glide;
 import com.example.diploma.R;
-import com.example.diploma.domain.models.CategoryModel;
 import com.example.diploma.domain.models.ProjectModel;
-import com.example.diploma.presentation.fragments.MyProjectInfoFragment;
+import com.example.diploma.presentation.fragments.projects.MyProjectInfoFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MyProjectsAdapter extends ArrayAdapter<ProjectModel> {

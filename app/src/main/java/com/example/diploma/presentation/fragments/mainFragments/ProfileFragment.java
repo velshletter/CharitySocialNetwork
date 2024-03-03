@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -15,18 +14,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.diploma.Backpressedlistener;
 import com.example.diploma.R;
 import com.example.diploma.data.retrofit.repositories.UsersRepository;
 import com.example.diploma.domain.models.UserModel;
 import com.example.diploma.presentation.Global;
-import com.example.diploma.presentation.fragments.MyProjectsFragment;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProfileFragment extends Fragment{
+public class ProfileFragment extends Fragment {
 
     UserModel user;
     public ProfileFragment() {
@@ -48,7 +45,6 @@ public class ProfileFragment extends Fragment{
                     load();
                 }
             }
-
             @Override
             public void onFailure(Call<UserModel> call, Throwable t) {
                 Toast.makeText(getContext(), "NetworkError", Toast.LENGTH_SHORT).show();

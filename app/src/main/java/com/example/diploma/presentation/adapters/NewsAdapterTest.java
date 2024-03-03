@@ -44,9 +44,15 @@ public class NewsAdapterTest extends ArrayAdapter<NewsModelResponse> {
         viewHolder.description.setText(String.valueOf(listItemUser.getText()));
         viewHolder.project_logo = convertView.findViewById(R.id.projectImage);
         viewHolder.postImage = convertView.findViewById(R.id.post_image);
+        if(listItemUser.getProjectLogo()!= "string") {
+            Glide.with(context)
+                    .load(listItemUser.getProjectLogo())
+                    .placeholder(R.drawable.baseline_border_color_24)
+                    .into(viewHolder.project_logo);
+        }
         if(!listItemUser.getPhotos().isEmpty()) {
             Glide.with(context)
-                    .load(listItemUser.getPhotos().get(0))
+                    .load(listItemUser.getPhotos().get(0).link)
                     .placeholder(R.drawable.baseline_border_color_24)
                     .into(viewHolder.postImage);
         }
