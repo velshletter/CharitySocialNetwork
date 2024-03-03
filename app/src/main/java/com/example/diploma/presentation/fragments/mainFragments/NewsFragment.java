@@ -50,7 +50,7 @@ public class NewsFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<NewsModelResponse>> call, Throwable t) {
-                Toast.makeText(getContext(), "NetworkError", Toast.LENGTH_SHORT);
+                Toast.makeText(getContext(), "NetworkError", Toast.LENGTH_SHORT).show();
             }
         });
     }
