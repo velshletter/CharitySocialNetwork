@@ -1,6 +1,7 @@
 package com.example.diploma.presentation.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
+import com.example.diploma.FillScreenImageActivity;
 import com.example.diploma.R;
 import com.example.diploma.data.retrofit.repositories.PostsRepository;
 import com.example.diploma.domain.models.NewsModelResponse;
@@ -66,6 +68,15 @@ public class MyNewsAdapter extends ArrayAdapter<NewsModelResponse> {
             Glide.with(context)
                     .load(listItemUser.getPhotos().get(0).link)
                     .into(viewHolder.postImage);
+            viewHolder.postImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), FillScreenImageActivity.class);
+                    intent.putExtra("url", listItemUser.getPhotos().get(0).link); // Здесь передайте ID вашего изображения
+                    getContext().startActivity(intent);
+                }
+
+            });
         }
 
         convertView.setOnLongClickListener(new View.OnLongClickListener() {

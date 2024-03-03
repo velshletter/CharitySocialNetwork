@@ -1,6 +1,7 @@
 package com.example.diploma.presentation.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.diploma.FillScreenImageActivity;
 import com.example.diploma.R;
 import com.example.diploma.domain.models.PhotoModel;
 
@@ -54,6 +56,15 @@ public class ProjectPhotoAdapter extends RecyclerView.Adapter<ProjectPhotoAdapte
                 .load(listItemAd.get(position).link)
                 .placeholder(R.drawable.baseline_work_24)
                 .into(holder.imageView);
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, FillScreenImageActivity.class);
+                intent.putExtra("url", listItemAd.get(position).link); // Здесь передайте ID вашего изображения
+                context.startActivity(intent);
+            }
+
+        });
     }
 
     @Override
