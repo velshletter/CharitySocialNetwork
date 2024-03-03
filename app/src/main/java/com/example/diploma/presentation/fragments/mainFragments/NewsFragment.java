@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.diploma.R;
 import com.example.diploma.data.retrofit.repositories.PostsRepository;
@@ -35,6 +36,10 @@ public class NewsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getPosts();
+    }
+
+    public void getPosts(){
         Call<List<NewsModelResponse>> call = new PostsRepository().getSubscrPosts();
         call.enqueue(new Callback<List<NewsModelResponse>>() {
             @Override
@@ -54,7 +59,6 @@ public class NewsFragment extends Fragment {
             }
         });
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,7 +72,14 @@ public class NewsFragment extends Fragment {
         newsListView = getView().findViewById(R.id.news_list);
         newsAdapter = new NewsAdapter(getContext(), R.layout.news_item_layout, newsList, getLayoutInflater());
         newsListView.setAdapter(newsAdapter);
-
+        SwipeRefreshLayout swipeRefreshLayout = getView().findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getPosts();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
     }
 }
