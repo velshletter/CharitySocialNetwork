@@ -83,9 +83,9 @@ public class LoginFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call call, Throwable t) {
-                        Log.d("MyLog", t.toString());
+                        Log.d("MyLog", t.getMessage());
                         Log.d("MyLog", call.toString());
-                        Toast.makeText(getContext(), "Пользователь не найден", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Проверьте подключение к сети", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

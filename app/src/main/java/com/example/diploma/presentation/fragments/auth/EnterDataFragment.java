@@ -124,7 +124,7 @@ public class EnterDataFragment extends Fragment {
                         @Override
                         public void onFailure(Call<UserModel> call, Throwable t) {
                             Log.d("MyLog", "Пользователь уже существует");
-                            Toast.makeText(getContext(), "Пользователь уже существует", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Проверьте подключение к сети", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

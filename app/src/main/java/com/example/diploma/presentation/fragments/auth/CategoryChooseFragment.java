@@ -124,7 +124,7 @@ public class CategoryChooseFragment extends Fragment {
 
                         @Override
                         public void onFailure(Call<UserModel> call, Throwable t) {
-                            Log.d("MyLog", "error");
+                            Toast.makeText(getContext(), "Проверьте подключение к сети", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

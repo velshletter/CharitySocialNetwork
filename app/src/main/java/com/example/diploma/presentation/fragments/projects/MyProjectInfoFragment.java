@@ -85,7 +85,7 @@ public class MyProjectInfoFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ProjectModel> call, Throwable t) {
-                Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Проверьте подключение к сети", Toast.LENGTH_SHORT).show();
             }
         });
     }

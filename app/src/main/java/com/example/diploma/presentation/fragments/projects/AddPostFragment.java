@@ -95,7 +95,7 @@ public class AddPostFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<NewsModelResponse> call, Throwable t) {
-                        Toast.makeText(getContext(), "Что-то пошло не так", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Проверьте подключение к сети", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

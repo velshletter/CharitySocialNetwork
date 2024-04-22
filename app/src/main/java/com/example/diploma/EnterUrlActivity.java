@@ -2,8 +2,6 @@ package com.example.diploma;
 
 import static com.example.diploma.presentation.Global.is_logined;
 
-import static java.security.AccessController.getContext;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,12 +15,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.diploma.data.retrofit.RetrofitInstance;
-import com.example.diploma.data.retrofit.repositories.UsersRepository;
+import com.example.diploma.data.retrofit.repositories.CategoriesRepository;
+import com.example.diploma.domain.models.CategoryModel;
 import com.example.diploma.presentation.Authorization;
 import com.example.diploma.presentation.Global;
-import com.example.diploma.presentation.fragments.auth.LoginFragment;
 
-public class EnterUrl extends AppCompatActivity {
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class EnterUrlActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,13 +45,24 @@ public class EnterUrl extends AppCompatActivity {
                     is_logined = sharedpreferences.getBoolean("is_logined", false);
                     Global.userId = sharedpreferences.getInt("user_id", 0);
                     RetrofitInstance.updateRetrofit(url);
-                    if (!is_logined) {
-                        Intent intent = new Intent(EnterUrl.this, Authorization.class);
-                        startActivity(intent);
-                    } else {
-                        Intent intent = new Intent(EnterUrl.this, MainActivity.class);
-                        startActivity(intent);
-                    }
+                    Call<List<CategoryModel>> call = new CategoriesRepository().getCategories();
+                    call.enqueue(new Callback<List<CategoryModel>>() {
+                        @Override
+                        public void onResponse(Call<List<CategoryModel>> call, Response<List<CategoryModel>> response) {
+                            if (!is_logined) {
+                                Intent intent = new Intent(EnterUrlActivity.this, Authorization.class);
+                                startActivity(intent);
+                            } else {
+                                Intent intent = new Intent(EnterUrlActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<List<CategoryModel>> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "Невозможно подключиться к серверу, проверьте введенный айпи", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                 }
             }
         });

@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.diploma.R;
@@ -80,19 +81,27 @@ public class ProjectInfoFragment extends Fragment {
                                 }
 
                                 @Override
-                                public void onFailure(Call<UserModel> call, Throwable t) {}
+                                public void onFailure(Call<UserModel> call, Throwable t) {
+                                    Toast.makeText(getContext(), "Проверьте подключение к сети", Toast.LENGTH_SHORT).show();
+                                }
                             });
                         }
                     }
+
                     @Override
-                    public void onFailure(Call<UserModel> call, Throwable t) {}
+                    public void onFailure(Call<UserModel> call, Throwable t) {
+                        Toast.makeText(getContext(), "Проверьте подключение к сети", Toast.LENGTH_SHORT).show();
+                    }
                 });
             }
+
             @Override
             public void onFailure(Call<ProjectModel> call, Throwable t) {
+                Toast.makeText(getContext(), "Проверьте подключение к сети", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
     private void displayData() {
         View view = getView();
         if (view != null) {
@@ -165,7 +174,6 @@ public class ProjectInfoFragment extends Fragment {
                         });
 
 
-
                     }
                     isFollowing = !isFollowing;
                 }
@@ -182,8 +190,6 @@ public class ProjectInfoFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
 
 
     }

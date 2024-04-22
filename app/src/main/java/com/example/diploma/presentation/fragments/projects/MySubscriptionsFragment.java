@@ -50,7 +50,7 @@ public class MySubscriptionsFragment extends Fragment {
 
             @Override
             public void onFailure(Call call, Throwable t) {
-                Toast.makeText(getContext(), "NetworkError", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Проверьте подключение к сети", Toast.LENGTH_SHORT).show();
             }
         });
     }

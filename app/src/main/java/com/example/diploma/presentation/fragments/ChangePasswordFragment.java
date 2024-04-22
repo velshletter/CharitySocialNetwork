@@ -47,7 +47,7 @@ public class ChangePasswordFragment extends Fragment {
 
             @Override
             public void onFailure(Call<UserModel> call, Throwable t) {
-                Toast.makeText(getContext(), "Что-то пошло не так", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Проверьте подключение к сети", Toast.LENGTH_SHORT).show();
             }
         });
     }
