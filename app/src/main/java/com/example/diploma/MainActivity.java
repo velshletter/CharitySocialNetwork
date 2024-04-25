@@ -13,6 +13,7 @@ import android.view.View;
 import com.example.diploma.data.retrofit.repositories.ProjectsRepository;
 import com.example.diploma.presentation.Authorization;
 import com.example.diploma.presentation.Global;
+import com.example.diploma.presentation.fragments.FeedBackFragment;
 import com.example.diploma.presentation.fragments.projects.AddProjectFragment;
 import com.example.diploma.presentation.fragments.ChangePasswordFragment;
 import com.example.diploma.presentation.fragments.ChangeUserDataFragment;
@@ -131,6 +132,13 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction()
                 .addToBackStack("ChangePasswordFragment")
                 .replace(R.id.flFragment, new ChangePasswordFragment())
+                .commit();
+    }
+
+    public void onClickSupport(View view) {
+        getSupportFragmentManager().beginTransaction()
+                .addToBackStack("SupportFragment")
+                .replace(R.id.flFragment, new FeedBackFragment())
                 .commit();
     }
 
