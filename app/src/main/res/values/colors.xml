@@ -6,5 +6,16 @@
     <color name="dark_gray">#535353</color>
     <color name="light_gray">#B5B5B5</color>
     <color name="purple">#FF6200EE</color>
+    <color name="red">#FF0000</color>
+    <color name="transp_red">#7AFF0000</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="background_color_edittext">#3B9CF096</color>
+
+    <color name="background_color">#FDF0DF</color>
+    <color name="color_primary">#068A5C</color>
+    <color name="color_primary_bright">#99EF95</color>
+    <color name="color_secondary">#E6EFCD</color>
+    <color name="color_tertiary">#DDD2C3</color>
+
+
 </resources>

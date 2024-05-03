@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Diploma"
+rootProject.name = "APBook"
 include(":app")

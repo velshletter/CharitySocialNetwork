@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "329060481041",
+    "project_id": "apbook-e3c84",
+    "storage_bucket": "apbook-e3c84.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:329060481041:android:5fcbef79d609e264f719b0",
+        "android_client_info": {
+          "package_name": "com.example.APBook"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsBBOnv13682WgX8JzXGA5lh3ph5fbVvg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

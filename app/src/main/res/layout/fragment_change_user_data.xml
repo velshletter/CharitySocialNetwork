@@ -29,127 +29,123 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/save_button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="64dp"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="48dp"
+        android:layout_marginBottom="32dp"
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView1"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_marginTop="132dp"
+        android:layout_width="216dp"
+        android:layout_height="216dp"
+        android:background="#68FFFFFF"
+        android:padding="4dp"
         android:scaleType="centerCrop"
         android:src="@drawable/baseline_person_24"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbar"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+        app:strokeColor="@color/color_primary"
+        app:strokeWidth="2dp" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
         android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:paddingLeft="16dp"
-        android:paddingTop="32dp"
-        android:paddingRight="16dp"
+        android:orientation="vertical"
+        android:paddingBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@id/save_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView1">
+        app:layout_constraintStart_toStartOf="parent">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/name_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:minHeight="48dp"
-                android:text="@string/name" />
-
-            <TextView
-                android:id="@+id/secname_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:minHeight="48dp"
-                android:text="@string/sec_name" />
-
-            <TextView
-                android:id="@+id/age_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:minHeight="48dp"
-                android:text="@string/age" />
-
-            <TextView
-                android:id="@+id/load_photo_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:minHeight="48dp"
-                android:text="Фото" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editNameTextField"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:hint="Введите имя"
+            app:boxBackgroundColor="@color/background_color_edittext"
+            app:boxCornerRadiusBottomEnd="24dp"
+            app:boxCornerRadiusBottomStart="24dp"
+            app:boxCornerRadiusTopEnd="24dp"
+            app:boxCornerRadiusTopStart="24dp">
 
-            <EditText
-                android:id="@+id/editTextText4"
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="text"
-                android:minHeight="48dp"
-                tools:ignore="SpeakableTextPresentCheck" />
+                android:singleLine="true" />
 
-            <EditText
-                android:id="@+id/editTextText3"
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editSecNameTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введите фамилию"
+            app:boxBackgroundColor="@color/background_color_edittext"
+            app:boxCornerRadiusBottomEnd="24dp"
+            app:boxCornerRadiusBottomStart="24dp"
+            app:boxCornerRadiusTopEnd="24dp"
+            app:boxCornerRadiusTopStart="24dp">
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="text"
-                android:minHeight="48dp"
-                tools:ignore="SpeakableTextPresentCheck" />
+                android:singleLine="true" />
 
-            <EditText
-                android:id="@+id/editTextText2"
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editAgeTF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введите ваш возраст"
+            app:boxBackgroundColor="@color/background_color_edittext"
+            app:boxCornerRadiusBottomEnd="24dp"
+            app:boxCornerRadiusBottomStart="24dp"
+            app:boxCornerRadiusTopEnd="24dp"
+            app:boxCornerRadiusTopStart="24dp">
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:inputType="number"
-                android:minHeight="48dp"
-                tools:ignore="SpeakableTextPresentCheck" />
+                android:singleLine="true" />
 
-            <EditText
-                android:id="@+id/editTextText"
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/uploadPhotoButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Загрузить фото"
+            app:boxBackgroundColor="@color/background_color_edittext"
+            app:boxCornerRadiusBottomEnd="24dp"
+            app:boxCornerRadiusBottomStart="24dp"
+            app:boxCornerRadiusTopEnd="24dp"
+            app:boxCornerRadiusTopStart="24dp">
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
+                android:singleLine="true"
                 android:clickable="false"
                 android:cursorVisible="false"
                 android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:inputType="text"
-                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-        </LinearLayout>
+                android:focusableInTouchMode="false"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
     </LinearLayout>
 
 

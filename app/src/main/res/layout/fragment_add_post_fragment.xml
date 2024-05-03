@@ -29,15 +29,13 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/create_post_button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginEnd="64dp"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="48dp"
         android:layout_marginBottom="64dp"
-        android:onClick="onSaveProject"
-        android:text="@string/create"
+        android:text="Опубликовать"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -47,78 +45,70 @@
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="16dp"
         android:text="Создание нового поста"
         android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/add_post_box"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
+        android:id="@+id/add_post_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:paddingLeft="16dp"
-        android:paddingTop="32dp"
-        android:paddingRight="16dp"
+        android:layout_marginHorizontal="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView1">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/description_edit"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:hint="Введите описание"
+            app:boxBackgroundColor="@color/background_color_edittext"
+            app:boxCornerRadiusBottomEnd="24dp"
+            app:boxCornerRadiusBottomStart="24dp"
+            app:boxCornerRadiusTopEnd="24dp"
+            app:boxCornerRadiusTopStart="24dp">
 
-            <TextView
-                android:id="@+id/secname_textview"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:minHeight="48dp"
-                android:text="Описание" />
-
-            <EditText
-                android:id="@+id/description_edit"
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:ems="10"
-                android:inputType="text"
-                tools:ignore="SpeakableTextPresentCheck" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:maxLines="5"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/upload_post_photo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:hint="Загрузите фото"
+            app:boxBackgroundColor="@color/background_color_edittext"
+            app:boxCornerRadiusBottomEnd="24dp"
+            app:boxCornerRadiusBottomStart="24dp"
+            app:boxCornerRadiusTopEnd="24dp"
+            app:boxCornerRadiusTopStart="24dp">
 
-            <TextView
-                android:id="@+id/logo_textview"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:minHeight="48dp"
-                android:text="Загрузите фото" />
-
-            <EditText
-                android:id="@+id/upload_post_photo"
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:clickable="false"
                 android:cursorVisible="false"
-                android:ems="10"
                 android:focusable="false"
-                android:focusableInTouchMode="false"
-                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-        </LinearLayout>
+                android:focusableInTouchMode="false"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
 

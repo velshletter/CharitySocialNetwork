@@ -1,13 +1,16 @@
 plugins {
     id("com.android.application")
+    id("com.google.gms.google-services")
 }
 
+val bundleId = "com.example.APBook"
+
 android {
-    namespace = "com.example.diploma"
+    namespace = bundleId
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.diploma"
+        applicationId = bundleId
         minSdk = 26
         targetSdk = 34
         versionCode = 1
@@ -33,18 +36,20 @@ android {
 
 dependencies {
 
+    implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-messaging")
+
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("com.squareup.retrofit2:converter-jackson:2.9.0")
-    implementation ("com.squareup.okhttp3:okhttp:4.9.3")
-    implementation("com.squareup.okhttp3:okhttp-urlconnection:4.8.1")
 
+    implementation ("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation ("com.squareup.okhttp3:okhttp-urlconnection:4.8.1")
 
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
-
-
 
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
