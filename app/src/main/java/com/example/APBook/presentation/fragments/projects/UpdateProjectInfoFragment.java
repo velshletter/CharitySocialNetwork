@@ -24,10 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.APBook.R;
@@ -37,7 +34,7 @@ import com.example.APBook.domain.models.CategoryModel;
 import com.example.APBook.domain.models.projects.ProjectModel;
 import com.example.APBook.domain.models.projects.ProjectModelAdd;
 import com.example.APBook.domain.models.UploadResponse;
-import com.example.APBook.presentation.Global;
+import com.example.APBook.Global;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.ByteArrayOutputStream;

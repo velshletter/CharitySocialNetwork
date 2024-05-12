@@ -19,11 +19,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
-import com.example.APBook.FillScreenImageActivity;
+import com.example.APBook.presentation.activities.FillScreenImageActivity;
 import com.example.APBook.R;
 import com.example.APBook.data.retrofit.repositories.PostsRepository;
 import com.example.APBook.domain.models.PostResponseModel;
-import com.example.APBook.presentation.Global;
+import com.example.APBook.Global;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +51,7 @@ public class MyNewsAdapter extends ArrayAdapter<PostResponseModel> {
 
         MyNewsAdapter.ViewHolder viewHolder;
         PostResponseModel listItemUser = listItemAd.get(position);
-        convertView = inflater.inflate(R.layout.news_item_layout, null, false);
+        convertView = inflater.inflate(R.layout.item_news, null, false);
         viewHolder = new MyNewsAdapter.ViewHolder();
         viewHolder.projectName = convertView.findViewById(R.id.project_name_textview);
         viewHolder.description = convertView.findViewById(R.id.description);

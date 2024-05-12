@@ -29,10 +29,15 @@ import com.example.APBook.data.retrofit.ImageBBInstance;
 import com.example.APBook.data.retrofit.repositories.UsersRepository;
 import com.example.APBook.domain.models.UploadResponse;
 import com.example.APBook.domain.models.UserModel;
-import com.example.APBook.presentation.Global;
+import com.example.APBook.Global;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.ByteArrayOutputStream;
@@ -41,6 +46,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -118,6 +125,40 @@ public class EnterDataFragment extends Fragment {
                         @Override
                         public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
                             if (response.body() != null) {
+                                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                                        .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                if(task.isSuccessful()){
+                                                    Log.d("MyLog", task.getResult().toString());
+                                                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                                                    Map<String, Object> user = new HashMap<>();
+                                                    user.put("email", email);
+                                                    user.put("photo", photoStr);
+                                                    user.put("first_name", nameStr);
+                                                    user.put("second_name", secNameStr);
+
+                                                    db.collection("users")
+                                                            .document(FirebaseAuth.getInstance().getUid())
+                                                            .set(user)
+                                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void documentReference) {
+                                                                    Log.d("MyLog", "DocumentSnapshot added with ID: ");
+                                                                }
+                                                            })
+                                                            .addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+                                                                    Log.e("MyLog", "Error adding document", e);
+                                                                }
+                                                            });
+                                                }
+
+                                            }
+                                        });
+
                                 CategoryChooseFragment categoryChooseFragment = new CategoryChooseFragment(new ArrayList<>());
                                 int userId = response.body().getId();
                                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.auth_fragment, categoryChooseFragment).commit();

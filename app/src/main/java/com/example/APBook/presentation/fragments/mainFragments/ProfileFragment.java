@@ -1,12 +1,13 @@
 package com.example.APBook.presentation.fragments.mainFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.APBook.presentation.activities.ChatsListActivity;
 import com.example.APBook.R;
 import com.example.APBook.data.retrofit.repositories.UsersRepository;
 import com.example.APBook.domain.models.UserModel;
-import com.example.APBook.presentation.Global;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.messaging.FirebaseMessaging;
+import com.example.APBook.Global;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -62,14 +61,6 @@ public class ProfileFragment extends Fragment {
 
         name_surnameTv.setText(user.getFirstName() + " " + user.getSecondName());
         ageTv.setText(String.valueOf(user.getAge()));
-        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
-            @Override
-            public void onComplete(@NonNull Task<String> task) {
-                if(!task.getResult().isEmpty()) {
-                    Log.d("MyLog", task.getResult());
-                }
-            }
-        });
         ImageView userImage = getView().findViewById(R.id.photo_profile_image_view);
         Glide.with(getContext())
                 .load(user.getPhoto())
@@ -85,6 +76,15 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ConstraintLayout button = getView().findViewById(R.id.button_chats);
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ChatsListActivity.class);
+//                getActivity().finish();
+                startActivity(intent);
+            }
+        });
     }
 }

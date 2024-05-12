@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.example.APBook.R;
 import com.example.APBook.data.retrofit.repositories.UsersRepository;
 import com.example.APBook.domain.models.UserModel;
-import com.example.APBook.presentation.Global;
+import com.example.APBook.Global;
 import com.example.APBook.presentation.fragments.auth.CategoryChooseFragment;
 
 import java.util.ArrayList;

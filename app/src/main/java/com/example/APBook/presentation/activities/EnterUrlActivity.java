@@ -1,6 +1,6 @@
-package com.example.APBook;
+package com.example.APBook.presentation.activities;
 
-import static com.example.APBook.presentation.Global.is_logined;
+import static com.example.APBook.Global.is_logined;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,11 +14,12 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.APBook.MainActivity;
+import com.example.APBook.R;
 import com.example.APBook.data.retrofit.RetrofitInstance;
 import com.example.APBook.data.retrofit.repositories.CategoriesRepository;
 import com.example.APBook.domain.models.CategoryModel;
-import com.example.APBook.presentation.Authorization;
-import com.example.APBook.presentation.Global;
+import com.example.APBook.Global;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
@@ -51,7 +52,7 @@ public class EnterUrlActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<List<CategoryModel>> call, Response<List<CategoryModel>> response) {
                             if (!is_logined) {
-                                Intent intent = new Intent(EnterUrlActivity.this, Authorization.class);
+                                Intent intent = new Intent(EnterUrlActivity.this, AuthorizationActivity.class);
                                 startActivity(intent);
                             } else {
                                 Intent intent = new Intent(EnterUrlActivity.this, MainActivity.class);

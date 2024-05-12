@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ import com.example.APBook.domain.models.projects.ProjectModel;
 import com.example.APBook.domain.models.UploadResponse;
 import com.example.APBook.presentation.adapters.MyNewsAdapter;
 import com.example.APBook.presentation.adapters.ProjectPhotoAdapter;
+import com.example.APBook.presentation.fragments.mainFragments.ProjectsFragment;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -104,7 +106,15 @@ public class MyProjectInfoFragment extends Fragment {
             Button addPhotoButton = getView().findViewById(R.id.add_photo_button);
             Button updateProjectButton = getView().findViewById(R.id.update_project_info);
             ListView newsListView = getView().findViewById(R.id.news_project_list);
+            LinearLayout ll = getView().findViewById(R.id.subscribers_ll);
 
+            ll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction().replace(R.id.flFragment, new SubscribersFragment(loadedProject.id)).commit();
+                }
+            });
             updateProjectButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -149,7 +159,7 @@ public class MyProjectInfoFragment extends Fragment {
             photosView.setAdapter(adapter);
             photosView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-            MyNewsAdapter newsAdapter = new MyNewsAdapter(getContext(), R.layout.news_item_layout, newsList, getLayoutInflater());
+            MyNewsAdapter newsAdapter = new MyNewsAdapter(getContext(), R.layout.item_news, newsList, getLayoutInflater());
             newsListView.setAdapter(newsAdapter);
         }
     }

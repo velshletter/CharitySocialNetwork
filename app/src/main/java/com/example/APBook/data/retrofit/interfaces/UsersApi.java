@@ -27,7 +27,7 @@ public interface UsersApi {
     @PUT("/api/users/{id}")
     Call<UserModel> updateUserData(@Path("id") int id, @Body UserModel userModel);
 
-    @PUT("/api/users/category/{id}")
+    @PUT("/api/users/{id}/category")
     Call<UserModel> updateCategories(@Path("id") int id, @Body List<UpdateCategoryRequest> request);
 
     @GET("/api/email/send-verification")

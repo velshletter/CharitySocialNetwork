@@ -14,6 +14,7 @@ public class UserModel {
     private String secondName;
     private String photo = "";
     private int age;
+    private int stars = 0;
     private List<ProjectModel> projects = new ArrayList<>();
     private List<Integer> selectedCategories = new ArrayList<>();
     private List<Integer> subscriptions = new ArrayList<>();
@@ -22,6 +23,7 @@ public class UserModel {
     public List<Integer> getLikedPosts() {
         return likedPosts;
     }
+
 
     public UserModel(int id, String firebaseToken, String email, String password, String firstName, String secondName, String photo, int age, List<ProjectModel> projects, List<Integer> selectedCategories, List<Integer> subscriptions, List<Integer> likedPosts) {
         this.id = id;
@@ -37,6 +39,15 @@ public class UserModel {
         this.subscriptions = subscriptions;
         this.likedPosts = likedPosts;
     }
+
+    public int getStars() {
+        return stars;
+    }
+
+    public void setStars(int stars) {
+        this.stars = stars;
+    }
+
     public void setLikedPosts(List<Integer> likedPosts) {
         this.likedPosts = likedPosts;
     }
@@ -133,7 +144,7 @@ public class UserModel {
         this.age = 0;
     }
 
-    public UserModel(int age, String firebaseToken, String email,  String password,String firstName, String secName,String photo) {
+    public UserModel(int age, String firebaseToken, String email, String password, String firstName, String secName, String photo) {
         this.age = age;
         this.firebaseToken = firebaseToken;
         this.email = email;
@@ -143,7 +154,7 @@ public class UserModel {
         this.photo = photo;
     }
 
-    public UserModel(int id, int age, String email,  String password,String firstName, String secName,String photo) {
+    public UserModel(int id, int age, String email, String password, String firstName, String secName, String photo) {
         this.id = id;
         this.age = age;
         this.email = email;

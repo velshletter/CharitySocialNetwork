@@ -3,7 +3,7 @@ package com.example.APBook.data.retrofit.repositories;
 import com.example.APBook.data.retrofit.RetrofitInstance;
 import com.example.APBook.domain.models.UpdateCategoryRequest;
 import com.example.APBook.domain.models.UserModel;
-import com.example.APBook.presentation.Global;
+import com.example.APBook.Global;
 
 import java.util.List;
 

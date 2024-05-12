@@ -22,7 +22,7 @@ import com.example.APBook.data.retrofit.repositories.UsersRepository;
 import com.example.APBook.domain.models.CategoryModel;
 import com.example.APBook.domain.models.UpdateCategoryRequest;
 import com.example.APBook.domain.models.UserModel;
-import com.example.APBook.presentation.Global;
+import com.example.APBook.Global;
 import com.example.APBook.presentation.adapters.CategoriesAdapter;
 
 import java.util.ArrayList;

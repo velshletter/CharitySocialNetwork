@@ -29,11 +29,11 @@ public class ProjectsFragment extends Fragment {
 
     private ProjectListAdapter projectsAdapter;
     private List<ProjectItemModel> projectsList = new ArrayList<>();
-    private ProjectsRepository projectsRepository;
+    private ProjectsRepository projectsRepository = new ProjectsRepository();
     private Call<List<ProjectItemModel>> call;
     ListView projectsListView;
-    public ProjectsFragment(ProjectsRepository projectsRepository) {
-        this.projectsRepository = projectsRepository;
+    public ProjectsFragment() {
+
     }
 
     @Override

@@ -48,7 +48,7 @@ public class NewsFragment extends Fragment {
                         Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
                     } else {
                         newsList = response.body();
-                        newsAdapter = new NewsAdapter(getContext(), R.layout.news_item_layout, newsList, getLayoutInflater(), getFragmentManager());
+                        newsAdapter = new NewsAdapter(getContext(), R.layout.item_news, newsList, getLayoutInflater(), getFragmentManager());
                         newsListView.setAdapter(newsAdapter);
                     }
                 }
@@ -70,7 +70,7 @@ public class NewsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         newsListView = getView().findViewById(R.id.news_list);
-        newsAdapter = new NewsAdapter(getContext(), R.layout.news_item_layout, newsList, getLayoutInflater(), getFragmentManager());
+        newsAdapter = new NewsAdapter(getContext(), R.layout.item_news, newsList, getLayoutInflater(), getFragmentManager());
         newsListView.setAdapter(newsAdapter);
         SwipeRefreshLayout swipeRefreshLayout = getView().findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

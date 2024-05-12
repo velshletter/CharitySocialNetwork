@@ -32,7 +32,7 @@ import com.example.APBook.domain.models.CategoryModel;
 import com.example.APBook.domain.models.projects.ProjectModel;
 import com.example.APBook.domain.models.projects.ProjectModelAdd;
 import com.example.APBook.domain.models.UploadResponse;
-import com.example.APBook.presentation.Global;
+import com.example.APBook.Global;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.ByteArrayOutputStream;

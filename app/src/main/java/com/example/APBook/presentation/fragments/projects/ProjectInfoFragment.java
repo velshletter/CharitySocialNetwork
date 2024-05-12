@@ -1,13 +1,8 @@
 package com.example.APBook.presentation.fragments.projects;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,18 +12,39 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.example.APBook.R;
 import com.example.APBook.data.retrofit.repositories.ProjectsRepository;
 import com.example.APBook.data.retrofit.repositories.UsersRepository;
 import com.example.APBook.domain.models.PostResponseModel;
-import com.example.APBook.domain.models.projects.ProjectModel;
 import com.example.APBook.domain.models.UserModel;
-import com.example.APBook.presentation.Global;
+import com.example.APBook.domain.models.firebase.ChatModel;
+import com.example.APBook.domain.models.projects.ProjectModel;
+import com.example.APBook.presentation.activities.ChatActivity;
+import com.example.APBook.Global;
 import com.example.APBook.presentation.adapters.NewsAdapter;
 import com.example.APBook.presentation.adapters.ProjectPhotoAdapter;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,6 +59,9 @@ public class ProjectInfoFragment extends Fragment {
     ProjectModel loadedProject;
     ProjectPhotoAdapter adapter;
     RecyclerView photosView;
+
+
+    List<ChatModel> chatsList = new ArrayList<>();
 
     public ProjectInfoFragment(ProjectModel project) {
         this.project = project;
@@ -125,15 +144,32 @@ public class ProjectInfoFragment extends Fragment {
             subscrTV.setText(String.valueOf(loadedProject.subscribers.size()));
             description.setText(loadedProject.description);
 
+            authorTV.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getChat();
+                }
+            });
+
             List<PostResponseModel> newsList = loadedProject.posts;
             ListView newsListView = getView().findViewById(R.id.news_project_list);
-            NewsAdapter newsAdapter = new NewsAdapter(getContext(), R.layout.news_item_layout, newsList, getLayoutInflater(), getFragmentManager());
+            NewsAdapter newsAdapter = new NewsAdapter(getContext(), R.layout.item_news, newsList, getLayoutInflater(), getFragmentManager());
             newsListView.setAdapter(newsAdapter);
 
             photosView = getView().findViewById(R.id.images);
             adapter = new ProjectPhotoAdapter(getContext(), loadedProject.photos);
             photosView.setAdapter(adapter);
             photosView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+
+            Button donateButton = getView().findViewById(R.id.donate_button);
+            donateButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction().replace(R.id.flFragment, new DonateFragment())
+                            .commit();
+                }
+            });
 
             Button followButton = getView().findViewById(R.id.follow_button);
             if (isFollowing) {
@@ -172,7 +208,6 @@ public class ProjectInfoFragment extends Fragment {
                             }
                         });
 
-
                     }
                     isFollowing = !isFollowing;
                 }
@@ -193,4 +228,88 @@ public class ProjectInfoFragment extends Fragment {
 
     }
 
+    public void getChat() {
+        String yourId = FirebaseAuth.getInstance().getUid();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users").whereEqualTo("email", user.getEmail())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
+                            String secondUserId = documentSnapshot.getId();
+                            if (yourId.equals(secondUserId)) {
+                                return;
+                            } else {
+                                Query query1 = db.collection("chats").whereEqualTo("user1", yourId).whereEqualTo("user2", secondUserId);
+                                Query query2 = db.collection("chats").whereEqualTo("user1", secondUserId).whereEqualTo("user2", yourId);
+
+                                Task<QuerySnapshot> task1 = query1.get();
+                                Task<QuerySnapshot> task2 = query2.get();
+
+                                Task<List<Task<?>>> allTasks = Tasks.whenAllComplete(task1, task2);
+
+                                allTasks.addOnSuccessListener(new OnSuccessListener<List<Task<?>>>() {
+                                    @Override
+                                    public void onSuccess(List<Task<?>> tasks) {
+                                        boolean task1Success = task1.isSuccessful();
+                                        boolean task2Success = task2.isSuccessful();
+                                        if (task1Success && task1.getResult().getDocuments().size() != 0) {
+                                            DocumentSnapshot document = task1.getResult().getDocuments().get(0);
+                                            String chatId = document.getId();
+                                            Intent intent = new Intent(getActivity(), ChatActivity.class);
+                                            intent.putExtra("chatId", chatId);
+                                            intent.putExtra("user_photo", user.getPhoto());
+                                            intent.putExtra("user_name", user.getFirstName() + " " + user.getSecondName());
+                                            getActivity().startActivity(intent);
+                                        } else {
+                                            if (task2Success && task1.getResult().getDocuments().size() != 0) {
+                                                DocumentSnapshot document = task2.getResult().getDocuments().get(0);
+                                                String chatId = document.getId();
+                                                Intent intent = new Intent(getActivity(), ChatActivity.class);
+                                                intent.putExtra("chatId", chatId);
+                                                intent.putExtra("user_photo", user.getPhoto());
+                                                intent.putExtra("user_name", user.getFirstName() + " " + user.getSecondName());
+                                                getActivity().startActivity(intent);
+                                            } else {
+                                                createChat(yourId, secondUserId);
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        } else {
+                            Log.d("TAG", "No documents found");
+                        }
+                    }
+                });
+    }
+
+
+    public void createChat(String yourId, String secondUserId) {
+        Map<String, Object> chatData = new HashMap<>();
+        chatData.put("user1", yourId);
+        chatData.put("user2", secondUserId);
+
+        FirebaseFirestore.getInstance().collection("chats")
+                .add(chatData)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Intent intent = new Intent(getActivity(), ChatActivity.class);
+                        intent.putExtra("chatId", documentReference.getId());
+                        intent.putExtra("user_photo", user.getPhoto());
+                        intent.putExtra("user_name", user.getFirstName() + " " + user.getSecondName());
+                        getActivity().startActivity(intent);
+                        Log.d("TAG", "New chat created with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("TAG", "Error creating chat", e);
+                    }
+                });
+    }
 }

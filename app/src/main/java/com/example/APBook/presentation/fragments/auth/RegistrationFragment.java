@@ -14,7 +14,11 @@ import androidx.fragment.app.Fragment;
 
 import com.example.APBook.R;
 import com.example.APBook.data.retrofit.repositories.UsersRepository;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
@@ -24,11 +28,11 @@ import retrofit2.Response;
 
 public class RegistrationFragment extends Fragment {
 
-
+    FirebaseAuth mAuth;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -41,19 +45,20 @@ public class RegistrationFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TextInputLayout email = getView().findViewById(R.id.email_edit);
-        TextInputLayout password = getView().findViewById(R.id.editTextTextPassword);
-        TextInputLayout repeatPassword = getView().findViewById(R.id.editTextTextPassword2);
+        TextInputLayout emailEditText = getView().findViewById(R.id.email_edit);
+        TextInputLayout passwordEditText = getView().findViewById(R.id.editTextTextPassword);
+        TextInputLayout repeatPasswordEditText = getView().findViewById(R.id.editTextTextPassword2);
         Button button = getView().findViewById(R.id.registration_button);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (String.valueOf(password.getEditText().getText()).equals(
-                        String.valueOf(repeatPassword.getEditText().getText()))
-                        && !String.valueOf(email.getEditText().getText()).equals("")) {
+                String email = emailEditText.getEditText().getText().toString().trim();
+                String password = passwordEditText.getEditText().getText().toString().trim();
+                if (password.equals(repeatPasswordEditText.getEditText().getText().toString())
+                        && !email.isEmpty()) {
 
-                    Call<Void> call = new UsersRepository().sendVerification(String.valueOf(email.getEditText().getText()));
+                    Call<Void> call = new UsersRepository().sendVerification(String.valueOf(emailEditText.getEditText().getText()));
                     call.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
@@ -69,8 +74,8 @@ public class RegistrationFragment extends Fragment {
 //                            Toast.makeText(getContext(), "Проверьте введенные данные", Toast.LENGTH_SHORT).show();
                         }
                     });
-                    VerificationFragment verificationFragment = new VerificationFragment(email.getEditText().getText().toString(),
-                            password.getEditText().getText().toString());
+                    VerificationFragment verificationFragment = new VerificationFragment(emailEditText.getEditText().getText().toString(),
+                            passwordEditText.getEditText().getText().toString());
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.auth_fragment, verificationFragment)
                             .commit();

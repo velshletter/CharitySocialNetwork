@@ -5,7 +5,7 @@ import com.example.APBook.domain.models.PhotoModel;
 import com.example.APBook.domain.models.projects.ProjectItemModel;
 import com.example.APBook.domain.models.projects.ProjectModel;
 import com.example.APBook.domain.models.projects.ProjectModelAdd;
-import com.example.APBook.presentation.Global;
+import com.example.APBook.Global;
 
 import java.util.List;
 

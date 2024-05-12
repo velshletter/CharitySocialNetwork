@@ -6,11 +6,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -21,14 +19,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.APBook.FillScreenImageActivity;
+import com.example.APBook.presentation.activities.FillScreenImageActivity;
 import com.example.APBook.R;
 import com.example.APBook.data.retrofit.repositories.PostsRepository;
 import com.example.APBook.domain.models.Comment;
 import com.example.APBook.domain.models.PostResponseModel;
-import com.example.APBook.presentation.Global;
+import com.example.APBook.Global;
 import com.example.APBook.presentation.adapters.CommentAdapter;
-import com.example.APBook.presentation.adapters.NewsAdapter;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;

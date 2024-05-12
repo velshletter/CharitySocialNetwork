@@ -37,11 +37,12 @@
         android:id="@+id/photo_profile_image_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="-24dp"
         android:foreground="@drawable/gradient_primary_270"
         app:layout_constrainedHeight="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.635"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/profile_info_box"
         app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
 
     <TextView
@@ -67,12 +68,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="-24dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/layout_top_corners_primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/photo_profile_image_view">
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/profile_box"
@@ -204,11 +204,47 @@
                     app:dividerColor="@color/color_primary" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/button_chats"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:clickable="true">
+
+                    <ImageView
+                        android:id="@+id/imageView41"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.5"
+                        app:srcCompat="@drawable/baseline_chat_24" />
+
+                    <TextView
+                        android:id="@+id/textView341"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="Чаты"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@id/imageView41"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.5" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    app:dividerColor="@color/color_primary" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/button_calendar"
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
-                    android:clickable="true"
-                    android:onClick="onCalendarClick">
+                    android:layout_marginBottom="2dp"
+                    android:clickable="true">
 
                     <ImageView
                         android:id="@+id/imageView4"
@@ -234,8 +270,6 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.5" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

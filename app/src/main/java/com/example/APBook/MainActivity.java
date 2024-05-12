@@ -2,23 +2,17 @@ package com.example.APBook;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.APBook.data.retrofit.repositories.ProjectsRepository;
-import com.example.APBook.presentation.Authorization;
-import com.example.APBook.presentation.Global;
+import com.example.APBook.presentation.activities.AuthorizationActivity;
+import com.example.APBook.presentation.activities.ChatActivity;
 import com.example.APBook.presentation.fragments.FeedBackFragment;
 import com.example.APBook.presentation.fragments.projects.AddProjectFragment;
 import com.example.APBook.presentation.fragments.ChangePasswordFragment;
@@ -29,11 +23,7 @@ import com.example.APBook.presentation.fragments.mainFragments.NewsFragment;
 import com.example.APBook.presentation.fragments.mainFragments.ProfileFragment;
 import com.example.APBook.presentation.fragments.mainFragments.ProjectsFragment;
 import com.example.APBook.presentation.fragments.mainFragments.SettingsFragment;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.Firebase;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 
 public class MainActivity extends AppCompatActivity
@@ -73,7 +63,7 @@ public class MainActivity extends AppCompatActivity
 
     NewsFragment newsFragment = new NewsFragment();
     ProfileFragment profileFragment = new ProfileFragment();
-    ProjectsFragment projectsFragment = new ProjectsFragment(projectsRepository);
+    ProjectsFragment projectsFragment = new ProjectsFragment();
     SettingsFragment settingsFragment = new SettingsFragment();
 
     @Override
@@ -140,7 +130,7 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.clear().apply();
         Global.is_logined = false;
-        Intent intent = new Intent(MainActivity.this, Authorization.class);
+        Intent intent = new Intent(MainActivity.this, AuthorizationActivity.class);
         finish();
         startActivity(intent);
     }
@@ -167,6 +157,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void onCalendarClick(View view) {
-
+        Intent intent = new Intent(this, ChatActivity.class);
+        this.finish();
+        startActivity(intent);
     }
 }

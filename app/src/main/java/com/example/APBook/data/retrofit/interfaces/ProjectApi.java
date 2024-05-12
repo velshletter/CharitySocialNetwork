@@ -1,9 +1,11 @@
 package com.example.APBook.data.retrofit.interfaces;
 
 import com.example.APBook.domain.models.PhotoModel;
+import com.example.APBook.domain.models.UserModel;
 import com.example.APBook.domain.models.projects.ProjectItemModel;
 import com.example.APBook.domain.models.projects.ProjectModel;
 import com.example.APBook.domain.models.projects.ProjectModelAdd;
+import com.example.APBook.domain.models.projects.SubscriberModel;
 
 import java.util.List;
 
@@ -33,8 +35,17 @@ public interface ProjectApi {
     @PUT("/api/project/{id}")
     Call<ProjectModel> updateProject(@Path("id") int id, @Body ProjectModelAdd projectModel);
 
+    @PUT("/api/project/{id}/subscribers/rate/{userId}")
+    Call<Void> rateSub(@Path("id") int id, @Path("userId") int userId);
+
+    @PUT("/api/project/{id}/subscribers/ignore/{userId}")
+    Call<Void> ignoreSub(@Path("id") int id, @Path("userId") int userId);
+
     @GET("/api/project/subscriptions")
     Call<List<ProjectModel>> getMySubscriptions(@Query("id") int id);
+
+    @GET("/api/project/{id}/subscribers")
+    Call<List<SubscriberModel>> getSubscribers(@Path("id") int id);
 
     @POST("/api/project/subscribe")
     Call<String> subscribe(@Query("userId") int userId, @Query("projectId") int projectId);

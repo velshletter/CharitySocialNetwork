@@ -4,7 +4,7 @@ import com.example.APBook.data.retrofit.RetrofitInstance;
 import com.example.APBook.domain.models.Comment;
 import com.example.APBook.domain.models.PostModelRequest;
 import com.example.APBook.domain.models.PostResponseModel;
-import com.example.APBook.presentation.Global;
+import com.example.APBook.Global;
 
 import java.util.List;
 

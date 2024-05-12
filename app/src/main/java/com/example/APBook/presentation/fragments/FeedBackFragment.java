@@ -11,13 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.APBook.R;
 import com.example.APBook.data.retrofit.repositories.FeedBackRepository;
 import com.example.APBook.domain.models.FeedBackModel;
-import com.example.APBook.presentation.Global;
+import com.example.APBook.Global;
 import com.example.APBook.presentation.fragments.mainFragments.SettingsFragment;
 import com.google.android.material.textfield.TextInputLayout;
 

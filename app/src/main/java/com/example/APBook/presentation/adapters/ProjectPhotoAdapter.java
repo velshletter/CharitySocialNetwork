@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.APBook.FillScreenImageActivity;
+import com.example.APBook.presentation.activities.FillScreenImageActivity;
 import com.example.APBook.R;
 import com.example.APBook.domain.models.PhotoModel;
 
@@ -61,7 +61,7 @@ public class ProjectPhotoAdapter extends RecyclerView.Adapter<ProjectPhotoAdapte
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, FillScreenImageActivity.class);
-                intent.putExtra("url", listItemAd.get(position).link); // Здесь передайте ID вашего изображения
+                intent.putExtra("url", listItemAd.get(position).link);
                 context.startActivity(intent);
             }
 

@@ -19,8 +19,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.APBook.DownloadImageTask;
@@ -29,13 +27,19 @@ import com.example.APBook.data.retrofit.ImageBBInstance;
 import com.example.APBook.data.retrofit.repositories.UsersRepository;
 import com.example.APBook.domain.models.UploadResponse;
 import com.example.APBook.domain.models.UserModel;
-import com.example.APBook.presentation.Global;
+import com.example.APBook.Global;
 import com.example.APBook.presentation.fragments.mainFragments.SettingsFragment;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -75,7 +79,7 @@ public class ChangeUserDataFragment extends Fragment {
         });
     }
 
-    private void loadData(){
+    private void loadData() {
         name.getEditText().setText(user.getFirstName());
         secName.getEditText().setText(user.getSecondName());
         ageEditText.getEditText().setText(String.valueOf(user.getAge()));
@@ -124,6 +128,22 @@ public class ChangeUserDataFragment extends Fragment {
                         @Override
                         public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
                             if (response.body() != null) {
+                                DocumentReference docRef = FirebaseFirestore.getInstance()
+                                        .collection("users")
+                                        .document(FirebaseAuth.getInstance().getUid());
+                                Map<String, Object> updates = new HashMap<>();
+                                updates.put("photo", photoStr);
+                                updates.put("first_name", nameStr);
+                                updates.put("second_name", "");
+
+                                docRef.update(updates)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Log.d("MyLog", "Document successfully updated!");
+                                            }
+
+                                        });
                                 SettingsFragment settingsFragment = new SettingsFragment();
                                 getActivity().getSupportFragmentManager()
                                         .beginTransaction().replace(R.id.flFragment, settingsFragment).commit();
@@ -172,9 +192,9 @@ public class ChangeUserDataFragment extends Fragment {
                         if (response.body() != null) {
                             UploadResponse uploadResponse = response.body();
                             Log.d("MyLog", uploadResponse.getData().getUrl());
-                            photo.getEditText() .setText(uploadResponse.getData().getUrl());
-                        }
-                        else Toast.makeText(getContext(), "Попробуйте еще раз", Toast.LENGTH_SHORT).show();
+                            photo.getEditText().setText(uploadResponse.getData().getUrl());
+                        } else
+                            Toast.makeText(getContext(), "Попробуйте еще раз", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

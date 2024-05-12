@@ -1,11 +1,7 @@
 package com.example.APBook.data.retrofit.repositories;
 
 import com.example.APBook.data.retrofit.RetrofitInstance;
-import com.example.APBook.domain.models.PostResponseModel;
 import com.example.APBook.domain.models.firebase.SendMessageDto;
-import com.example.APBook.presentation.Global;
-
-import java.util.List;
 
 import retrofit2.Call;
 
