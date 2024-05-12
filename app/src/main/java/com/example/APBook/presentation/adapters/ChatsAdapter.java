@@ -50,9 +50,9 @@ public class ChatsAdapter extends ArrayAdapter<ChatModel> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
+        convertView = inflater.inflate(R.layout.item_chat, null, false);
         ChatsAdapter.ViewHolder viewHolder;
         chat = chatModelList.get(position);
-
         String secondUserId = FirebaseAuth.getInstance().getUid().equals(chat.getUid1()) ? chat.getUid2() : chat.getUid1();
         FirebaseFirestore.getInstance().collection("users")
                 .document(secondUserId)
@@ -66,7 +66,7 @@ public class ChatsAdapter extends ArrayAdapter<ChatModel> {
                         }
                     }
                 });
-        convertView = inflater.inflate(R.layout.item_chat, null, false);
+
         viewHolder = new ChatsAdapter.ViewHolder();
         viewHolder.logo = convertView.findViewById(R.id.chat_user_photo);
         Glide.with(context)
@@ -76,7 +76,6 @@ public class ChatsAdapter extends ArrayAdapter<ChatModel> {
         viewHolder.username = convertView.findViewById(R.id.user_chat_textview);
 
         viewHolder.username.setText(fio);
-//        viewHolder.description.setText(listItemUser.description);
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.APBook.presentation.activities.CalendarActivity;
 import com.example.APBook.presentation.activities.ChatsListActivity;
 import com.example.APBook.R;
 import com.example.APBook.data.retrofit.repositories.UsersRepository;
@@ -79,11 +80,21 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ConstraintLayout button = getView().findViewById(R.id.button_chats);
+        ConstraintLayout buttonCalendar = getView().findViewById(R.id.button_calendar);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ChatsListActivity.class);
+//                getActivity().finish();
+                startActivity(intent);
+            }
+        });
+
+        buttonCalendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CalendarActivity.class);
 //                getActivity().finish();
                 startActivity(intent);
             }
