@@ -48,7 +48,7 @@ public class CommentAdapter extends ArrayAdapter<Comment> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         ViewHolder viewHolder = new ViewHolder();
         Comment comment = comments.get(position);
-        convertView = inflater.inflate(R.layout.comment_item, null, false);
+        convertView = inflater.inflate(R.layout.item_comment, null, false);
 
         viewHolder.authorImage = convertView.findViewById(R.id.author_image);
         viewHolder.authorName = convertView.findViewById(R.id.author_name);

@@ -147,7 +147,7 @@ public class CommentsFragment extends Fragment {
 //        progressBar.setVisibility(View.VISIBLE);
 
         commentListView = getView().findViewById(R.id.comments_listview);
-        commentAdapter = new CommentAdapter(getContext(), R.layout.comment_item, commentList, getLayoutInflater());
+        commentAdapter = new CommentAdapter(getContext(), R.layout.item_comment, commentList, getLayoutInflater());
         commentListView.setAdapter(commentAdapter);
 //        commentListView.setVisibility(View.INVISIBLE);
 //        commentAdapter.setOnDataLoadedListener(new CommentAdapter.OnDataLoadedListener() {

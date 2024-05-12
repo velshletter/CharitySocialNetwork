@@ -58,7 +58,9 @@ public class ProfileFragment extends Fragment {
     public void load(){
         TextView name_surnameTv = getView().findViewById(R.id.name_user_tw);
         TextView ageTv = getView().findViewById(R.id.age_profile);
+        TextView stars_Tv = getView().findViewById(R.id.stars_profile);
 
+        stars_Tv.setText(String.valueOf(user.getStars()));
         name_surnameTv.setText(user.getFirstName() + " " + user.getSecondName());
         ageTv.setText(String.valueOf(user.getAge()));
         ImageView userImage = getView().findViewById(R.id.photo_profile_image_view);

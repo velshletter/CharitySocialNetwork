@@ -47,11 +47,9 @@ public class ProjectListAdapter extends ArrayAdapter<ProjectItemModel> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-
-
         ProjectListAdapter.ViewHolder viewHolder;
         listItemUser = listItemAd.get(position);
-        convertView = inflater.inflate(R.layout.project_item, null, false);
+        convertView = inflater.inflate(R.layout.item_project, null, false);
         viewHolder = new ProjectListAdapter.ViewHolder();
         viewHolder.logo = convertView.findViewById(R.id.post_image);
         Glide.with(context)

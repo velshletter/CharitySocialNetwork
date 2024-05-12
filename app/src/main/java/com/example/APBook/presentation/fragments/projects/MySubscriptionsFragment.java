@@ -44,7 +44,7 @@ public class MySubscriptionsFragment extends Fragment {
             @Override
             public void onResponse(Call<List<ProjectModel>> call, Response<List<ProjectModel>> response) {
                 subscribedProjectsList = response.body();
-                projectsAdapter = new ProjectsAdapter(getContext(), R.layout.project_item, subscribedProjectsList, getLayoutInflater(), getFragmentManager());
+                projectsAdapter = new ProjectsAdapter(getContext(), R.layout.item_project, subscribedProjectsList, getLayoutInflater(), getFragmentManager());
                 projectsListView.setAdapter(projectsAdapter);
             }
 
@@ -67,7 +67,7 @@ public class MySubscriptionsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         projectsListView = getView().findViewById(R.id.subscriptions_list);
-        projectsAdapter = new ProjectsAdapter(getContext(), R.layout.project_item, subscribedProjectsList, getLayoutInflater(),getFragmentManager());
+        projectsAdapter = new ProjectsAdapter(getContext(), R.layout.item_project, subscribedProjectsList, getLayoutInflater(),getFragmentManager());
         projectsListView.setAdapter(projectsAdapter);
 
 

@@ -14,10 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.APBook.R;
 import com.example.APBook.data.retrofit.repositories.UsersRepository;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
@@ -39,7 +36,7 @@ public class RegistrationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.registration_layout, container, false);
+        return inflater.inflate(R.layout.fragment_registration, container, false);
     }
 
     @Override

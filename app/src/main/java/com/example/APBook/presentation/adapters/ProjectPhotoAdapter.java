@@ -46,7 +46,7 @@ public class ProjectPhotoAdapter extends RecyclerView.Adapter<ProjectPhotoAdapte
     @Override
     public ProjectPhotoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.project_image_item, viewGroup, false);
+                .inflate(R.layout.item_project_image, viewGroup, false);
         return new ViewHolder(view);
     }
 

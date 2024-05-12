@@ -95,7 +95,7 @@
                 android:layout_marginVertical="16dp"
                 android:layout_marginStart="24dp"
                 android:text="Возраст:"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/divider"
                 app:layout_constraintStart_toStartOf="@id/profile_box"
@@ -107,9 +107,33 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text=""
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@id/divider"
                 app:layout_constraintStart_toEndOf="@id/age_profile_textview"
+                app:layout_constraintTop_toTopOf="@id/profile_box" />
+
+            <TextView
+                android:id="@+id/stars_profile_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:layout_marginEnd="8dp"
+                android:text="Оценок:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/divider"
+                app:layout_constraintEnd_toStartOf="@id/stars_profile"
+                app:layout_constraintTop_toTopOf="@id/profile_box" />
+
+            <TextView
+                android:id="@+id/stars_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text=""
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/divider"
+                app:layout_constraintEnd_toEndOf="@id/profile_box"
                 app:layout_constraintTop_toTopOf="@id/profile_box" />
 
             <com.google.android.material.divider.MaterialDivider

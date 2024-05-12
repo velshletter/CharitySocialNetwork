@@ -47,7 +47,7 @@ dependencies {
     implementation("com.google.firebase:firebase-storage-ktx")
 
     implementation ("com.jakewharton.threetenabp:threetenabp:1.3.1")
-    implementation ("com.github.prolificinteractive:material-calendarview:2.0.1")
+//    implementation ("com.prolificinteractive:material-calendarview:2.0.1")
 
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")

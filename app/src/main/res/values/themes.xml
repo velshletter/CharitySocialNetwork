@@ -10,5 +10,6 @@
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorSecondary">@color/color_primary_bright</item>
         <item name="colorTertiary">@color/color_secondary</item>
+        <item name="colorSurfaceContainer">@color/color_secondary</item>
     </style>
 </resources>

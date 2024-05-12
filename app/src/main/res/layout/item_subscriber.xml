@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="6dp"
+        android:layout_marginHorizontal="4dp"
         android:elevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:background="@drawable/layout_all_corners_background_color"

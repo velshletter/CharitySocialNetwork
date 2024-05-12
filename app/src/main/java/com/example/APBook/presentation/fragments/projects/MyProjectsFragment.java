@@ -46,7 +46,7 @@ public class MyProjectsFragment extends Fragment {
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                 if (response.body() != null) {
                     myProjectsList = response.body().getProjects();
-                    myProjectsAdapter = new MyProjectsAdapter(getContext(), R.layout.project_item, myProjectsList, getLayoutInflater(), getFragmentManager());
+                    myProjectsAdapter = new MyProjectsAdapter(getContext(), R.layout.item_project, myProjectsList, getLayoutInflater(), getFragmentManager());
                     listview.setAdapter(myProjectsAdapter);
                 }
                 else {
@@ -72,7 +72,7 @@ public class MyProjectsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         listview = getView().findViewById(R.id.my_projects_list);
-        myProjectsAdapter = new MyProjectsAdapter(getContext(), R.layout.project_item, myProjectsList, getLayoutInflater(), getFragmentManager());
+        myProjectsAdapter = new MyProjectsAdapter(getContext(), R.layout.item_project, myProjectsList, getLayoutInflater(), getFragmentManager());
         listview.setAdapter(myProjectsAdapter);
     }
 

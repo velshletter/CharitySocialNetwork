@@ -44,7 +44,7 @@ public class ProjectsFragment extends Fragment {
             @Override
             public void onResponse(Call<List<ProjectItemModel>> call, Response<List<ProjectItemModel>> response) {
                 projectsList = response.body();
-                projectsAdapter = new ProjectListAdapter(getContext(), R.layout.project_item, projectsList, getLayoutInflater(), getParentFragmentManager());
+                projectsAdapter = new ProjectListAdapter(getContext(), R.layout.item_project, projectsList, getLayoutInflater(), getParentFragmentManager());
                 projectsListView.setAdapter(projectsAdapter);
             }
 
@@ -65,7 +65,7 @@ public class ProjectsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         projectsListView = getView().findViewById(R.id.my_projects_list);
-        projectsAdapter = new ProjectListAdapter(getContext(), R.layout.project_item, projectsList, getLayoutInflater(),getFragmentManager());
+        projectsAdapter = new ProjectListAdapter(getContext(), R.layout.item_project, projectsList, getLayoutInflater(),getFragmentManager());
         projectsListView.setAdapter(projectsAdapter);
     }
 
